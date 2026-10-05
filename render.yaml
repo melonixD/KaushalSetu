@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: kaushalsetu
+    runtime: python
+    buildCommand: python -m compileall -q voice_model_server.py gemini_backend.py
+    startCommand: python voice_model_server.py --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
